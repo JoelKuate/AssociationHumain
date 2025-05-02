@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="accueil-header">
+        <h1>Bienvenue sur notre Blog</h1>
+        <p class="sous-titre">Découvrez nos derniers articles</p>
+    </div>
+
+    <div class="derniers-articles">
+        {% if articles %}
+            {% for article in articles %}
+                <article class="article-preview">
+                    <h2><a href="{% url 'detail_article' pk=article.pk %}">{{ article.titre }}</a></h2>
+                    <div class="article-meta">
+                        <p>Publié le {{ article.date_publication|date:"d F Y" }}</p>
+                        <p>Par {{ article.auteur }}</p>
+                    </div>
+                    <div class="article-extrait">
+                        {{ article.contenu|truncatewords:50 }}
+                    </div>
+                    <a href="{% url 'detail_article' pk=article.pk %}" class="lire-plus">Lire la suite</a>
+                </article>
+            {% endfor %}
+        {% else %}
+            <p>Aucun article n'est disponible pour le moment.</p>
+        {% endif %}
+    </div>
+
+    <div class="voir-plus">
+        <a href="{% url 'liste_articles' %}" class="btn-tous-articles">Voir tous les articles</a>
+    </div>
+{% endblock %}
