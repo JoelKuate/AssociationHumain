@@ -1,11 +1,300 @@
-<h1>Contactez-nous</h1>
+{% extends 'blog/base.html' %}
 
-{% if success %}
-<p>Merci ! Votre message a été envoyé.</p>
-{% endif %}
+{% block content %}
+<div class="eco-contact-container">
+    <!-- Section de texte (à gauche) -->
+    <div class="text-section">
+        <h1>L'IA menace notre planète, <span class="highlight">agissons ensemble</span></h1>
+        
+        <p class="description">
+            Découvrez comment l'intelligence artificielle consomme des ressources énergétiques 
+            colossales et contribue au réchauffement climatique.
+        </p>
+        
+        <p class="cta-text">
+            Contactez-nous pour en savoir plus sur nos actions et comment vous 
+            pouvez participer à notre mouvement pour une IA responsable.
+        </p>
+        
+        <div class="action-buttons">
+            <a href="#" class="btn primary-btn">Rejoindre l'association</a>
+            <a href="#" class="btn secondary-btn">En savoir plus</a>
+        </div>
+    </div>
+    
+    <!-- Section de formulaire (à droite) -->
+    <div class="form-section">
+        <h2>Contactez-nous</h2>
+        
+        {% if success %}
+        <div class="success-message">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <p>Merci ! Votre message a été envoyé.</p>
+        </div>
+        {% endif %}
+        
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+            
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                <small class="help-text">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            
+            <button type="submit" class="submit-button">
+                <span>Envoyer</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Envoyer</button>
-</form>
+<style>
+    /* Variables basées sur l'image fournie */
+    :root {
+        --dark-green: #3e6825;
+        --light-green: #4d7b34;
+        --accent-green: #5a8f3e;
+        --light-blue: #8ed1bd;
+        --white: #ffffff;
+        --light-gray: #f8f9fa;
+        --text-color: #ffffff;
+        --border-radius: 8px;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Container principal */
+    .eco-contact-container {
+        display: flex;
+        background-color: var(--dark-green);
+        padding-top: 4rem; /* Padding en haut comme demandé */
+        min-height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    /* Section de texte (gauche) */
+    .text-section {
+        flex: 1;
+        padding: 3rem 4rem;
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .text-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        font-weight: bold;
+    }
+
+    .highlight {
+        color: var(--light-blue);
+        display: block;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 90%;
+    }
+
+    .cta-text {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        border-radius: var(--border-radius);
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .primary-btn {
+        background-color: var(--white);
+        color: var(--dark-green);
+    }
+
+    .primary-btn:hover {
+        background-color: var(--light-gray);
+    }
+
+    .secondary-btn {
+        background-color: transparent;
+        color: var(--white);
+        border: 1px solid var(--white);
+    }
+
+    .secondary-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Section de formulaire (droite) */
+    .form-section {
+        flex: 1;
+        background-color: var(--white);
+        padding: 3rem;
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
+        box-shadow: var(--shadow);
+    }
+
+    .form-section h2 {
+        color: var(--dark-green);
+        margin-bottom: 2rem;
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    /* Message de succès */
+    .success-message {
+        display: flex;
+        align-items: center;
+        background-color: #d1e7dd;
+        color: #0f5132;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        margin-bottom: 2rem;
+    }
+
+    .success-message svg {
+        margin-right: 0.75rem;
+        color: #0f5132;
+    }
+
+    /* Style du formulaire */
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--dark-green);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: none;
+        border-color: var(--accent-green);
+        box-shadow: 0 0 0 3px rgba(90, 143, 62, 0.2);
+    }
+
+    .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .help-text {
+        display: block;
+        margin-top: 0.5rem;
+        color: #6c757d;
+        font-size: 0.875rem;
+    }
+
+    .error-message {
+        display: block;
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Bouton d'envoi */
+    .submit-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--accent-green);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .submit-button:hover {
+        background-color: var(--light-green);
+    }
+
+    .submit-button svg {
+        margin-left: 0.5rem;
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .eco-contact-container {
+            flex-direction: column;
+        }
+        
+        .text-section, .form-section {
+            padding: 2rem;
+        }
+        
+        .form-section {
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .text-section h1 {
+            font-size: 2rem;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+        }
+        
+        .btn {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}

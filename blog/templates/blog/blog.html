@@ -1,8 +1,27 @@
-<h1>Blog de l'association</h1>
+{% extends 'blog/base.html' %}
 
-{% for article in articles %}
-    <h2>{{ article.titre }}</h2>
-    <p>{{ article.contenu }}</p>
-    <p>Publié le {{ article.date_publication }}</p>
-    <hr>
-{% endfor %}
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <h1>Blog de l'association</h1>
+        <p>Découvrez nos derniers articles et actualités</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="article-grid">
+        {% for article in articles %}
+            <article class="article-card">
+                <div class="article-content">
+                    <h2>{{ article.titre }}</h2>
+                    <p>{{ article.contenu|truncatewords:30 }}</p>
+                    <p class="article-meta">Publié le {{ article.date_publication|date:"d F Y" }}</p>
+                    <a href="#" class="btn-primary">Lire la suite</a>
+                </div>
+            </article>
+        {% empty %}
+            <p>Aucun article disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
