@@ -26,7 +26,7 @@
             100% { transform: translateY(0px); }
         }
         .earth-icon {
-            filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.6));
+            filter: drop-shadow(0 0 8px rgba(137, 240, 175, 0.6));
         }
     </style>
 </head>
@@ -42,11 +42,11 @@
                     Découvrez comment l'intelligence artificielle consomme des ressources énergétiques colossales et contribue au réchauffement climatique.
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                    <a href="#actions" class="bg-white text-emerald-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300 text-center">
+                    <a href="{% url 'contact' %}" class="bg-white text-emerald-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300 text-center">
                         Rejoindre l'association
                     </a>
-                    <a href="#problematique" class="border-2 border-white text-white font-bold py-3 px-6 rounded-lg hover:bg-white hover:text-emerald-800 transition duration-300 text-center">
-                        En savoir plus
+                    <a href="{% url 'liste_articles' %}" class="border-2 border-white text-white font-bold py-3 px-6 rounded-lg hover:bg-white hover:text-emerald-800 transition duration-300 text-center">
+                        Nos actions
                     </a>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="md:w-1/2">
                     <div class="">
                         <div class="">
-                            <img src="https://img.freepik.com/premium-photo/green-earth-with-trees-grass-white-background_979520-55711.jpg" alt="Serveurs informatiques énergivores" class="">
+                            <img src="https://www.one.org/fr/wp-content/uploads/sites/4/2023/08/What-we-do_Model_1094x732-1024x685.png" alt="Serveurs informatiques énergivores" class="">
                         </div>
                         <div class="">
                             <div class="flex">
@@ -195,7 +195,7 @@
                 <div class="md:w-2/3 p-8">
                     <h3 class="text-2xl font-bold mb-4">Campagne #GreenAIChallenge</h3>
                     <p class="text-gray-700 mb-6">
-                        Nous organisons des défis mensuels pour réduire son empreinte numérique et sensibiliser aux alternatives écologiques dans le domaine de l'IA.
+                        Nous organisons des défis mensuels visant à encourager chacun à réduire son empreinte numérique tout en sensibilisant aux alternatives écologiques dans le domaine de l'intelligence artificielle. À travers ces initiatives, nous souhaitons promouvoir des pratiques plus responsables et durables, en mettant en lumière des solutions respectueuses de l'environnement, tant au niveau de l'utilisation des outils numériques que du développement et de l'entraînement des modèles d'IA. <br> Ces défis offrent l'occasion d'adopter des gestes simples mais impactants, de découvrir des technologies plus sobres et de réfléchir collectivement à l'avenir de l'IA sous un prisme éthique et écologique.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">Événements</span>
@@ -236,12 +236,6 @@
         </div>
     </section>
 
-
-
-
- 
-
-    
 
     <!-- Back to top button -->
     <button id="back-to-top" class="fixed bottom-8 right-8 bg-emerald-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300">
